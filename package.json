@@ -1,0 +1,21 @@
+{
+  "name": "restful-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "keywords": [],
+  "author": "Eyosias Desta",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "sequelize": "^6.21.4",
+    "sqlite3": "^5.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
