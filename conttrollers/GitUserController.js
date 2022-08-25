@@ -1,5 +1,6 @@
 const GitUser = require("../models/GitUser");
 const axios = require("axios");
+const public_api = process.env['PUBLIC_GITHUB_USERS_API'];
 
 
 const getCircularReplacer = () => {
@@ -23,7 +24,7 @@ exports.get_all_user_gists = async (req, res) => {
   });
   if (!findUserName) {
     const resp = await axios.get(
-      `https://api.github.com/users/${req.params.username}/gists`,
+      `${public_api}/${req.params.username}/gists`,
       {
         headers: {
           Accept: "application/vnd.github+json",
@@ -38,7 +39,7 @@ exports.get_all_user_gists = async (req, res) => {
     res.send(JSON.stringify(resp.data, getCircularReplacer()));
   } else {
     const resp = await axios.get(
-      `https://api.github.com/users/${req.params.username}/gists?since=${findUserName.lastseen}`,
+      `${public_api}/${req.params.username}/gists?since=${findUserName.lastseen}`,
       {
         headers: {
           Accept: "application/vnd.github+json",

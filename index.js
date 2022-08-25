@@ -13,4 +13,3 @@ const routes = require('./routes/GitUserRoute');
 app.use(`/user`, routes);
 
 app.listen(3000, console.log('server started'));
-//  https://api.github.com/users/:username/gists?since=2020-12-12T6:6:6Z
