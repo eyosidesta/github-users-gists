@@ -1,7 +1,6 @@
 const GitUser = require("../models/GitUser");
 const axios = require("axios");
-const public_api = process.env['PUBLIC_GITHUB_USERS_API'];
-
+const public_api = process.env.PUBLIC_GITHUB_USERS_API || 'https://api.github.com/users';
 
 const getCircularReplacer = () => {
   const seen = new WeakSet();
@@ -31,7 +30,7 @@ exports.get_all_user_gists = async (req, res) => {
         },
       }
     );
-    console.log(resp);
+
     await GitUser.create({
       username: req.params.username,
       lastseen: new Date(),
@@ -46,8 +45,6 @@ exports.get_all_user_gists = async (req, res) => {
         },
       }
     );
-    
-    console.log(resp.data);
     res.send(JSON.stringify(resp.data, getCircularReplacer()));
     findUserName.lastseen = new Date();
     await findUserName.save();

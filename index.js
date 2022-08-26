@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -12,4 +13,4 @@ sequelize.sync().then(() => {
 const routes = require('./routes/GitUserRoute');
 app.use(`/user`, routes);
 
-app.listen(3000, console.log('server started'));
+app.listen(PORT, console.log('server started'));
