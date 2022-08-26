@@ -66,6 +66,9 @@ GitUser.init({
 module.exports = GitUser
 ```
 
+### Documentation
+api documentation is found in docs folder index.html file
+
 ### Deployment
 
 In order to deploy this project in aws we need to follow the following steps:
@@ -92,6 +95,40 @@ $ cd Nodejs-docker
 $ pwd
 $ cd/home/ubuntu/
 $ git clone https://github.com/eyosidesta/github-users-gists
+
+-> Install Docker
+$ sudo apt-get update
+$ sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg –dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ docker –version
+$ sudo groupadd docker
+$ sudo usermod -aG docker daniEL2371
+
+-> Dockerize your Node.js application in the EC2 instance
+$ pwd
+$ cd /home/ubuntu/Nodejs-docker
+$ vim Dockerfile
+
+#Base Image node:12.18.4-alpine
+$ FROM node:12.18.4-alpine
+#Set working directory to /app
+$ WORKDIR /app
+#Set PATH /app/node_modules/.bin
+$ ENV PATH /app/node_modules/.bin:$PATH
+#Copy package.json in the image
+$ COPY package.json ./
+
+#Install Packages
+$ RUN npm install express --save
+$ RUN npm install mysql --save
+
+#Copy the app
+$ COPY . ./
+#Expose application port
+$ EXPOSE 3000
+
 
 ```
 Which should result in response similar to the following:
